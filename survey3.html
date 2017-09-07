@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Student Survey</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var button = document.getElementById("submitButton");
+            button.addEventListener("click", postData);
+        });
+        function postData() {
+            document.getElementById("submitButton").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", responseReceivedHandler);
+            xhr.open("POST", "survey3.php");
+
+            var postString = "";
+
+            var classes = ["class-web", "class-net", "class-gui", "class-oop"];
+            for (var i = 0; i < classes.length; i++) {
+                console.log(classes[i]);
+                if (document.getElementById(classes[i]).checked) {
+                    postString += "classes%5B%5D=" + classes[i] + "&";
+                }
+            }
+
+            if (document.getElementById("gender-male").checked)
+                postString += "gender=M";
+            if (document.getElementById("gender-female").checked)
+                postString += "gender=F";
+
+            xhr.setRequestHeader("Content-Type",
+                    "application/x-www-form-urlencoded");
+
+            xhr.send(postString);
+        }
+
+        function responseReceivedHandler() {
+            if (this.status == 200) {
+                document.getElementById("message").innerHTML = this.responseText;
+            }
+            else {
+                document.getElementById("message").innerHTML = "Unable to load.";
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+<h3>Please Enter the Following Information:</h3>
+<form>
+    <input type="hidden" name="input-source" value="Secret Survey">
+    <p>
+        Name: <input type="text" name="name" size="30">
+    </p>
+    <p>
+        Classification:
+        <select name="class">
+            <option>Freshman</option>
+            <option selected="selected">Sophomore</option>
+            <option>Junior</option>
+            <option>Senior</option>
+        </select>
+    </p>
+    <p>
+        Gender:
+        <label>
+            <input type="radio" name="gender" value="M" id="gender-male" checked="checked">Male
+        </label>
+        <label>
+            <input type="radio" name="gender" value="F" id="gender-female">Female
+        </label>
+    </p>
+    <p>
+        E-mail address: <input type="text" name="email" size="30">
+    </p>
+    <p>
+        Password: <input type="password" name="pword">
+    </p>
+    <p>
+        What are your favorite computer classes?
+        <br/> &nbsp;
+        <label>
+            <input type="checkbox" name="classes[]" value="class-web" id="class-web">Web Development &nbsp;
+        </label>
+        <label>
+            <input type="checkbox" name="classes[]" value="class-net" id="class-net">Networking &nbsp;
+        </label>
+        <label>
+            <input type="checkbox" name="classes[]" value="class-gui" id="class-gui">GUI &nbsp;
+        </label>
+        <label>
+            <input type="checkbox" name="classes[]" value="class-oop" id="class-oop">OOP
+        </label>
+    </p>
+    <p>
+        Are you graduating this spring?
+        <label>
+            <input type="radio" name="grad" value="Yes">Yes
+        </label>
+        <label>
+            <input type="radio" name="grad" value="No">No
+        </label>
+    </p>
+    <p>
+        Other information we should know?<br>
+        <textarea name="comments" rows="3" cols="50"></textarea>
+    </p>
+    <p>
+        <button id="submitButton" type="button">Submit</button>
+        <input id="reset" type="reset" value="Clear Form">
+    </p>
+</form>
+<div id="message">
+</div>
+</body>
+</html>
