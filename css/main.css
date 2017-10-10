@@ -1,0 +1,47 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300,800);
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+a {
+  color: #FF3363;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000;
+}
+
+::selection {
+  color: #fff;
+  background-color: #000;
+}
+
+.page_title {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.page_description {
+	margin-bottom: 10px;
+}
+
+.page_links {
+	margin-bottom: 10px;
+}
+
+.page_links a {
+	margin-bottom: 15px;
+}
